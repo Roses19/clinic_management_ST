@@ -7,11 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
-            steps {
-                git 'https://github.com/Roses19/clinic_management_ST.git'
-            }
-        }
 
         stage('Setup Python') {
             steps {

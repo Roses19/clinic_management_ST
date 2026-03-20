@@ -4,7 +4,9 @@ pipeline {
     triggers {
         githubPush()
     }
-
+    tools {
+        python 'Python3' 
+    }
     stages {
 
 

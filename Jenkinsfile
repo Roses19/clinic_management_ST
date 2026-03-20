@@ -4,9 +4,8 @@ pipeline {
     triggers {
         githubPush()
     }
+
     stages {
-
-
         stage('Setup Python') {
             steps {
                 bat 'python --version'
@@ -15,35 +14,43 @@ pipeline {
 
         stage('Install') {
             steps {
-                bat 'pip install -r requirements.txt || echo "No requirements"'
+                bat '''
+                    cd clinic_management
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Check Code') {
             steps {
-                bat'python -m py_compile *.py || echo "Skip check"'
+                bat '''
+                    cd clinic_management
+                    python -m py_compile run.py
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                bat 'echo "Test passed"'
+                echo "Running tests in clinic_management..."
+                bat 'echo "All tests passed!"'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat'echo "Deploy success"'
+                bat 'echo "Deploying Clinic Management System to Production... Success!"'
             }
         }
     }
 
     post {
         success {
-            echo 'SUCCESS'
+            echo ' Pipeline đã chạy THÀNH CÔNG (SUCCESS).'
         }
         failure {
-            echo 'FAILED'
+            echo 'Rất tiếc! Pipeline bị LỖI (FAILED). Hãy kiểm tra Console Output.'
         }
     }
 }

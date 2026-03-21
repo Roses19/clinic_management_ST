@@ -34,14 +34,13 @@ pipeline {
                 """
             }
         }
-
         stage('Static Analysis (Check Code)') {
             steps {
                 echo '--- Giai đoạn 3: Quét lỗi cú pháp (Shift-left Testing) ---'
                 bat """
                     call venv\\Scripts\\activate
                     cd ${PROJECT_DIR}
-                    python -m py_compile *.py
+                    for %%f in (*.py) do python -m py_compile %%f
                 """
             }
         }

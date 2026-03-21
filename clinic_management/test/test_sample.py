@@ -1,4 +1,4 @@
 def test_connection():
     assert True
-def start_app() # Thiếu dấu : ở đây
+def start_app():
     print("App is running")

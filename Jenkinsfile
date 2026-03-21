@@ -54,7 +54,7 @@ pipeline {
                     cd ${PROJECT_DIR}
                     python -m pytest --version
                     echo "Đang chạy các test case cho hệ thống phòng khám..."
-                    python -m pytest tests/ || echo "Running mock tests..."
+                    python -m pytest test/ || echo "Running mock tests..."
                 """
             }
         }

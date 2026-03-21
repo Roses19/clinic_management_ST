@@ -38,7 +38,6 @@ pipeline {
         stage('Static Analysis (Check Code)') {
             steps {
                 echo '--- Giai đoạn 3: Quét lỗi cú pháp (Shift-left Testing) ---'
-                // Sử dụng py_compile để kiểm tra lỗi cú pháp mà không cần chạy code
                 bat """
                     call venv\\Scripts\\activate
                     cd ${PROJECT_DIR}
@@ -50,7 +49,6 @@ pipeline {
         stage('Automated Unit Test') {
             steps {
                 echo '--- Giai đoạn 4: Kiểm thử logic với Pytest ---'
-                // Demo kỹ thuật: Nếu test fail, Pipeline sẽ dừng ngay lập tức (Fail-fast)
                 bat """
                     call venv\\Scripts\\activate
                     cd ${PROJECT_DIR}
@@ -72,13 +70,13 @@ pipeline {
         }
     }
 
+    // Đã sửa lỗi lặp từ khóa post và đóng ngoặc ở đây
     post {
-        post {
         success {
-            echo ' Pipeline đã chạy THÀNH CÔNG (SUCCESS).'
+            echo '✅ Pipeline đã chạy THÀNH CÔNG (SUCCESS).'
         }
         failure {
-            echo 'Rất tiếc! Pipeline bị LỖI (FAILED). Hãy kiểm tra Console Output.'
+            echo '❌ Rất tiếc! Pipeline bị LỖI (FAILED). Hãy kiểm tra Console Output.'
         }
         always {
             echo '--- Hoàn tất quy trình CI/CD ---'

@@ -25,12 +25,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo '--- Giai đoạn 2: Cài đặt thư viện từ requirements.txt ---'
+                echo '--- Giai đoạn 2: Cài đặt thư viện ---'
                 bat """
                     call venv\\Scripts\\activate
                     cd ${PROJECT_DIR}
                     python -m pip install --upgrade pip
-                    python -m pip install -r requirements.txt || echo "No requirements found or failed"
+                    python -m pip install pytest
+                    python -m pip install -r requirements.txt
                 """
             }
         }

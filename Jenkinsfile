@@ -59,15 +59,7 @@ pipeline {
             }
         }
 
-        stage('Deployment') {
-            steps {
-                echo '--- Giai đoạn 5: Mô phỏng đóng gói và triển khai ---'
-                bat """
-                    echo "Đang nén artifact: clinic_system.zip..."
-                    echo "Đã triển khai phiên bản mới lên Production Server thành công!"
-                """
-            }
-        }
+        
     }
 
     // Đã sửa lỗi lặp từ khóa post và đóng ngoặc ở đây

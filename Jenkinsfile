@@ -59,7 +59,16 @@ pipeline {
             }
         }
 
-        
+        stage('Deployment') {
+            steps {
+                echo '--- Giai đoạn 5: Đóng gói và Lưu trữ Artifact ---'
+                bat """
+                    powershell -Command "Compress-Archive -Path ${PROJECT_DIR}\\* -DestinationPath clinic_system.zip -Force"
+                """
+                // Đây là lệnh quan trọng nhất để đẩy file lên giao diện Jenkins
+                archiveArtifacts artifacts: 'clinic_system.zip', fingerprint: true
+            }
+        }
     }
 
     // Đã sửa lỗi lặp từ khóa post và đóng ngoặc ở đây

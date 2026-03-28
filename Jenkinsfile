@@ -41,7 +41,8 @@ pipeline {
                 bat """
                     call venv\\Scripts\\activate
                     cd ${PROJECT_DIR}
-                    for %%f in (*.py) do python -m py_compile %%f
+                    dir /s /b *.py | findstr /v "venv" > files.txt
+                    for /f "tokens=*" %%f in (files.txt) do python -m py_compile "%%f"
                 """
             }
         }
